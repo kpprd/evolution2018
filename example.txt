@@ -1,0 +1,131 @@
+# chromosome 1
+Loci = [PTMN]
+lambda = 1.0, 1.0, 1.0, 1.0, 0.0
+Mu = 0.0
+d = 0.001, 0.001, 0.001, 0.001, 0.001
+
+
+# chromosome sex
+loci = $
+heterogametic = female
+
+
+# Equilibrium 1
+check = 500
+
+% remove
+alleles = P1, [1
+
+% condition
+delta = 1.0e-12
+
+% follow
+alleles = T1, M1, N1
+haplotypes = T1&M1&N1, T0&M0&N0
+screen = true
+
+% do mutate
+[00P00T11M11N11]00 to [01P00T11M11N11]01
+frequency = 0.002
+deme = 1
+
+
+# Equilibrium 2
+check = 1000
+
+% remove
+alleles = P1
+
+% condition
+delta = 1.0e-10
+
+% follow
+alleles = [1
+haplotypes = [1&T1&M1&N1, T0&M0&N0, T1&M1&N1
+screen = true
+
+% do mutate
+[11P00T11M11N11]11 to [11P01T11M11N11]11
+frequency = 0.002
+deme = 1
+
+
+# Equilibrium 3
+
+check = 100
+
+% condition
+delta = 1.0e-10
+
+% follow
+alleles = P0, P1, [1
+haplotypes = [1&P1&T1&M1&N1&]1, [1&P0&T1&M1&N1&]1,[0&P0&T0&M0&N0&]0, P1&T1&M1&N1, P0&T0&M0&N0, T1&M1&N1, T0&M0&N0
+screen = true
+file = progress
+
+% do end
+
+
+# Population
+Gamma = 0.0, 0.0, 0.0, 1.0
+c = 0.0
+
+% remove
+haplotypes = ]1&N0
+
+% migration
+0.935 0.065
+0.065 0.935
+
+% Interactions
+fitness = $&T*M&N
+preference = PxT
+
+% Fitness
+Incompatibilities = M,N, 0.5, 0.5
+
+% Mating
+quickset = P, T, 0.1, 0.1, 1.0
+
+
+# Deme 0
+
+static = false
+
+% Allele frequencies
+P|T|M|N0=1.0
+P|T|M|N1=0.0
+[|]0=1.0
+[|]1=0.0
+
+% Fitness
+{m}&T00 = 1.2
+{m}&T01 = 1.0
+{m}&T11 = 0.833333333
+
+
+# Deme 1
+
+% Allele frequencies
+T|M|N0=0.0
+T|M|N1=1.0
+P0=1.0
+P1=0.0
+[|]0=1.0
+[|]1=0.0
+
+% Fitness
+{m}&T11 = 1.2
+{m}&T01 = 1.0
+{m}&T00 = 0.833333333
+
+
+
+
+# Report
+
+alleles = P1, T1, M1, N1, [1, ]1
+haplotypes = [0&P0&T0&M0&N0&]0, [1&P1&T1&M1&N1&]1, P0&T0&M0&N0, P1&T1&M1&N1, T0&M0&N0, T1&M1&N1, M1&N1, M0&N0
+equilibria = true
+file = +_output.txt
+screen = true
