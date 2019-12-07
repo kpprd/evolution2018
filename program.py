@@ -2950,7 +2950,7 @@ class Simulation:
 		input_text = input_file.read()
 		input_file.close()
 		
-		# Red chromosome input
+		# Read chromosome input
 		chromosome_pattern = '#\s*C*c*hromosome\s(?P<key>[A-Za-z\d]+)(?P<info>[^#]+)'
 		chromosome_matches = re.finditer(chromosome_pattern, input_text)
 		chromosome_index = 0
